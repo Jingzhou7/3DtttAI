@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c11e8262-bae5-4dba-b3fd-f6abe6fc640d" name="Default Changelist" comment="" />
+    <list default="true" id="c11e8262-bae5-4dba-b3fd-f6abe6fc640d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/pane6.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/panel3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/aiTicTacToe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/aiTicTacToe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/runTicTacToe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/runTicTacToe.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -32,7 +45,21 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.runTicTacToe">
+    <configuration name="pane6" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="pane6" />
+      <module name="PA3_AI" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="panel3" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="panel3" />
+      <module name="PA3_AI" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="runTicTacToe" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="11" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -43,6 +70,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.runTicTacToe" />
+      <item itemvalue="Application.pane6" />
+      <item itemvalue="Application.panel3" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.panel3" />
+        <item itemvalue="Application.pane6" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -62,7 +100,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

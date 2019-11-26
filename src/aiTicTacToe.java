@@ -4,60 +4,63 @@ public class aiTicTacToe {
 	public int player; //1 for player 1 and 2 for player 2
 	private positionTicTacToe myNextMove;
 
-	private double max = Double.POSITIVE_INFINITY;
-	private double min = Double.NEGATIVE_INFINITY;
+	private double positiveInfinity = Double.POSITIVE_INFINITY;
+	private double negativeInfinity = Double.NEGATIVE_INFINITY;
 	private List<List<positionTicTacToe>> winningLines = initializeWinningLines();
 
-	private int getStateOfPositionFromBoard(positionTicTacToe position, List<positionTicTacToe> board)
-	{
-		//return the state of the position on the board
-		//-1 draw, 0 over, 1 and 2 players
-		int index = position.x*16+position.y*4+position.z;
-		return board.get(index).state;
-	}
 
+	//My 3D tictactoe AI algorithms (different lookahead depth for analyzing)
 	public positionTicTacToe myAIAlgorithm(List<positionTicTacToe> board, int player)
 	{
 		// call minimax with alpha-beta pruning to get the best next move
-		minimax(board, 4, min, max, true);
+		long startTime = System.nanoTime();
+		minimax(board, 4, negativeInfinity, positiveInfinity, true);
 		//myNextMove is set to the best we find in minimax
+		long endTime = System.nanoTime();
+		System.out.println("depth 4: " + (endTime - startTime) / 1000000);
 		return myNextMove;
 	}
 
 	public positionTicTacToe myAIAlgorithm2(List<positionTicTacToe> board, int player)
 	{
 		// call minimax with alpha-beta pruning to get the best next move
-		minimax(board, 3, min, max, true);
+		long startTime = System.nanoTime();
+		minimax(board, 5, negativeInfinity, positiveInfinity, true);
 		//myNextMove is set to the best we find in minimax
+		long endTime = System.nanoTime();
+		System.out.println("depth 5: " + (endTime - startTime) / 1000000);
 		return myNextMove;
 	}
 
 	public positionTicTacToe myAIAlgorithm3(List<positionTicTacToe> board, int player)
 	{
 		// call minimax with alpha-beta pruning to get the best next move
-		minimax(board, 4, min, max, true);
+		long startTime = System.nanoTime();
+		minimax(board, 3, negativeInfinity, positiveInfinity, true);
 		//myNextMove is set to the best we find in minimax
+		long endTime = System.nanoTime();
+		System.out.println("depth 3: " + (endTime - startTime) / 1000000);
 		return myNextMove;
 	}
 
+
+	//minimax algorithm implemention
 	private int minimax(List<positionTicTacToe> board, int depth, double alpha, double beta, boolean isMaximizer)
 	{
-		// Max look-ahead depth or game ends
-		// return static evaluation of board
+		// Base Case: Max look-ahead depth or game ends, no child node.
 		if(depth == 0 || isEnded(board) !=0) { //-1 for draw, 0 for not end, 1 and 2 for players
 			return staticEvaluate(board, player);
 		}
-
-		// If at maximizing level, recurse on next possible boards and choose max static_eval value
+		//Recursive call
 		if (isMaximizer) {
 			//at the level of maximizer
-			double maxScore = min;
+			double maxScore = negativeInfinity;
 			for(positionTicTacToe move : board) {
 
 				// check for invalid move
 				if(getStateOfPositionFromBoard(move, board) != 0) continue;
 
-				// copy a board by deepCopyBoard (this is the child node)
+				// copy a board by deepCopyBoard (make a child node)
 				List<positionTicTacToe> copyBoard = deepCopyBoard(board);
 				if(player == 1) makeMove(move, 1, copyBoard);
 				else makeMove(move, 2, copyBoard);
@@ -65,7 +68,6 @@ public class aiTicTacToe {
 				// Recursive call on minimax for depth-1 and switch to minimizer level
 				int score = minimax(copyBoard, depth-1, alpha, beta, false);
 				if(score > maxScore) {
-					//update myNextMove if the current move has highest score so far
 					myNextMove = new positionTicTacToe(move.x, move.y, move.z);
 				}
 
@@ -77,18 +79,18 @@ public class aiTicTacToe {
 
 			}
 
-			// return max value
+			// return max value for maximizer
 			return (int) maxScore;
 
 		} else {
 			//at the level of minimizer
-			double minScore = max;
+			double minScore = positiveInfinity;
 			for(positionTicTacToe move : board) {
 
 				// check for invalid move
 				if(getStateOfPositionFromBoard(move, board) != 0) continue;
 
-				// copy a board by deepCopyBoard (this is a child node)
+				// copy a board by deepCopyBoard (make a child node)
 				List<positionTicTacToe> copyBoard = deepCopyBoard(board);
 				if(player == 1) makeMove(move, 2, copyBoard);
 				else makeMove(move, 1, copyBoard);
@@ -107,19 +109,15 @@ public class aiTicTacToe {
 
 			}
 
-			// return max value
+			// return min value for minimizer
 			return (int) minScore;
 		}
 	}
-//===============================================================================================
-// Helper functions
 
-
-	private int isEnded(List<positionTicTacToe> board)
-	{
+	private int isEnded(List<positionTicTacToe> board) {
 		List<List<positionTicTacToe>> winningLines = initializeWinningLines();
 		for(int i=0;i<winningLines.size();i++)
-		//check every possible winningLine
+		//check whether any possible winningLine contains all markers of one player.
 		{
 
 			positionTicTacToe p0 = winningLines.get(i).get(0);
@@ -147,19 +145,13 @@ public class aiTicTacToe {
 		}
 		return -1; //draw
 	}
-	private static List<positionTicTacToe> deepCopyBoard(List<positionTicTacToe> board)
-	{
-		//deep copy of game boards
-		List<positionTicTacToe> copiedBoard = new ArrayList<positionTicTacToe>();
-		for(int i=0;i<board.size();i++)
-		{
-			copiedBoard.add(new positionTicTacToe(board.get(i).x,board.get(i).y,board.get(i).z,board.get(i).state));
-		}
-		return copiedBoard;
-	}
+
 	public int staticEvaluate(List<positionTicTacToe> targetBoard, int playerNum)
 	{
-		// Evaluates the state of the current board based on #player pieces and #opponent pieces on each winning line
+		// for a targetBoard configuration, we go through all winning lines one by one and count the number of piece for each player.
+		// the final output score is based on the count. To emphasize the importance of getting more piece in a winning line, we do some mathematical manipulation and output the difference between 2 players
+
+
 
 		int score = 0;
 		//counting the winning combinations theoretical state of the board
@@ -181,7 +173,18 @@ public class aiTicTacToe {
 		return score;
 	}
 
-	public boolean makeMove(positionTicTacToe position, int player, List<positionTicTacToe> targetBoard)
+	private static List<positionTicTacToe> deepCopyBoard(List<positionTicTacToe> board)
+	{
+		//deep copy of game boards
+		List<positionTicTacToe> copiedBoard = new ArrayList<positionTicTacToe>();
+		for(int i=0;i<board.size();i++)
+		{
+			copiedBoard.add(new positionTicTacToe(board.get(i).x,board.get(i).y,board.get(i).z,board.get(i).state));
+		}
+		return copiedBoard;
+	}
+
+	private boolean makeMove(positionTicTacToe position, int player, List<positionTicTacToe> targetBoard)
 	{
 		//make move on Tic-Tac-Toe board, given position and player
 		//player 1 = 1, player 2 = 2
@@ -206,7 +209,17 @@ public class aiTicTacToe {
 		return false;
 	}
 
-	public positionTicTacToe YourAIAlgorithm(List<positionTicTacToe> board, int player)
+	private int getStateOfPositionFromBoard(positionTicTacToe position, List<positionTicTacToe> board)
+	{
+		//return the state of the position on the board
+		//-1 draw, 0 over, 1 and 2 players
+		int index = position.x*16+position.y*4+position.z;
+		return board.get(index).state;
+	}
+
+
+	//this is the random algorithm provided
+	public positionTicTacToe randomAIAlgorithm(List<positionTicTacToe> board, int player)
 	{
 		positionTicTacToe myNextMove = new positionTicTacToe(0,0,0);
 		

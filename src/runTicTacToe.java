@@ -187,6 +187,7 @@ public class runTicTacToe {
 		int index = position.x*16+position.y*4+position.z;
 		return targetBoard.get(index).state;
 	}
+
 	private int isEnded()
 	{
 		//test whether the current game is ended
@@ -292,6 +293,8 @@ public class runTicTacToe {
 			System.out.println();
 		}
 	}
+
+	// provided in runTicTacToe
 	public boolean makeMove(positionTicTacToe position, int player, List<positionTicTacToe> targetBoard)
 	{
 		//make move on Tic-Tac-Toe board, given position and player 
@@ -320,21 +323,21 @@ public class runTicTacToe {
 	{
 
 		Random rand = new Random();
-		int turn = rand.nextInt(2)+1; //1 = player1's turn, 2 = player2's turn, who go first is randomized
-		int startTurn = turn;
-		System.out.println("******" + startTurn);
-		//int turn = 2;
+//		int turn = rand.nextInt(2)+1; //1 = player1's turn, 2 = player2's turn, who go first is randomized
+//		int startTurn = turn;
+//		System.out.println( startTurn);
+		int turn = 2;
 		while((result = isEnded())==0) //game loop
 		{
 			if(turn==1)
 			{
-				positionTicTacToe player1NextMove = ai1.myAIAlgorithm2(board,1); //1 stands for player 1
+				positionTicTacToe player1NextMove = ai1.myAIAlgorithm(board,1); //1 stands for player 1
 				if(makeMove(player1NextMove,1,board))
 					turn = 2;
 			}
 			else if(turn==2)
 			{
-				positionTicTacToe player2NextMove = ai2.myAIAlgorithm(board,2); //2 stands for player 2
+				positionTicTacToe player2NextMove = ai2.myAIAlgorithm2(board,2); //2 stands for player 2
 				if(makeMove(player2NextMove,2,board))
 					turn = 1;
 			}
@@ -350,24 +353,24 @@ public class runTicTacToe {
 		{
 			//game ends, player 1 wins 
 			System.out.println("Player1 Wins");
-			//printBoardTicTacToe(board);
+			printBoardTicTacToe(board);
 		}
 		else if(result==2)
 		{
 			//game ends, player 1 wins 
 			System.out.println("Player2 Wins");
-			//printBoardTicTacToe(board);
+			printBoardTicTacToe(board);
 		}
 		else if(result==-1)
 		{
 			//game ends, it's a draw 
 			System.out.println("This is a draw.");
-			//printBoardTicTacToe(board);
+			printBoardTicTacToe(board);
 		}
 		else
 		{
 			//exception occurs, stop
-			//System.out.println("Error!");
+			System.out.println("Error!");
 		}
 		
 	}
@@ -379,8 +382,9 @@ public class runTicTacToe {
 	public static void main(String[] args) {		
 
 		//run game loop
-		runTicTacToe rttt = new runTicTacToe();
-		for(int i =0; i<100; i++) {
+
+		for(int i =0; i<3; i++) {
+			runTicTacToe rttt = new runTicTacToe();
 			rttt.run();
 
 		}
