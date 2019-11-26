@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c11e8262-bae5-4dba-b3fd-f6abe6fc640d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pane6.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/panel3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/aiTicTacToe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/aiTicTacToe.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/runTicTacToe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/runTicTacToe.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

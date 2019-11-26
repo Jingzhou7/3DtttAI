@@ -114,38 +114,6 @@ public class aiTicTacToe {
 		}
 	}
 
-	private int isEnded(List<positionTicTacToe> board) {
-		List<List<positionTicTacToe>> winningLines = initializeWinningLines();
-		for(int i=0;i<winningLines.size();i++)
-		//check whether any possible winningLine contains all markers of one player.
-		{
-
-			positionTicTacToe p0 = winningLines.get(i).get(0);
-			positionTicTacToe p1 = winningLines.get(i).get(1);
-			positionTicTacToe p2 = winningLines.get(i).get(2);
-			positionTicTacToe p3 = winningLines.get(i).get(3);
-
-			int state0 = getStateOfPositionFromBoard(p0,board);
-			int state1 = getStateOfPositionFromBoard(p1,board);
-			int state2 = getStateOfPositionFromBoard(p2,board);
-			int state3 = getStateOfPositionFromBoard(p3,board);
-
-			//if they have the same state (marked by same player) and they are not all marked.
-			if(state0 == state1 && state1 == state2 && state2 == state3 && state0!=0)
-			{
-				return state0; //1 for player1 wins, 2 for player2 wins
-			}
-		}
-		for(int i=0;i<board.size();i++)
-		{
-			if(board.get(i).state==0)
-			{
-				return 0; //not ended
-			}
-		}
-		return -1; //draw
-	}
-
 	public int staticEvaluate(List<positionTicTacToe> targetBoard, int playerNum)
 	{
 		// for a targetBoard configuration, we go through all winning lines one by one and count the number of piece for each player.
@@ -173,6 +141,8 @@ public class aiTicTacToe {
 		return score;
 	}
 
+	//********************************************
+	//all methods provided
 	private static List<positionTicTacToe> deepCopyBoard(List<positionTicTacToe> board)
 	{
 		//deep copy of game boards
@@ -215,6 +185,38 @@ public class aiTicTacToe {
 		//-1 draw, 0 over, 1 and 2 players
 		int index = position.x*16+position.y*4+position.z;
 		return board.get(index).state;
+	}
+
+	private int isEnded(List<positionTicTacToe> board) {
+		List<List<positionTicTacToe>> winningLines = initializeWinningLines();
+		for(int i=0;i<winningLines.size();i++)
+		//check whether any possible winningLine contains all markers of one player.
+		{
+
+			positionTicTacToe p0 = winningLines.get(i).get(0);
+			positionTicTacToe p1 = winningLines.get(i).get(1);
+			positionTicTacToe p2 = winningLines.get(i).get(2);
+			positionTicTacToe p3 = winningLines.get(i).get(3);
+
+			int state0 = getStateOfPositionFromBoard(p0,board);
+			int state1 = getStateOfPositionFromBoard(p1,board);
+			int state2 = getStateOfPositionFromBoard(p2,board);
+			int state3 = getStateOfPositionFromBoard(p3,board);
+
+			//if they have the same state (marked by same player) and they are not all marked.
+			if(state0 == state1 && state1 == state2 && state2 == state3 && state0!=0)
+			{
+				return state0; //1 for player1 wins, 2 for player2 wins
+			}
+		}
+		for(int i=0;i<board.size();i++)
+		{
+			if(board.get(i).state==0)
+			{
+				return 0; //not ended
+			}
+		}
+		return -1; //draw
 	}
 
 
