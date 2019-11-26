@@ -2,7 +2,8 @@ import java.util.*;
 
 //TicTacToe-4x4x4
 public class runTicTacToe {
-	
+
+	public static int winCount = 0;
 	private List<List<positionTicTacToe>>  winningLines = new ArrayList<>(); 
 	private List<positionTicTacToe> board = new ArrayList<>();
 	private aiTicTacToe ai1;
@@ -323,10 +324,10 @@ public class runTicTacToe {
 	{
 
 		Random rand = new Random();
-//		int turn = rand.nextInt(2)+1; //1 = player1's turn, 2 = player2's turn, who go first is randomized
-//		int startTurn = turn;
-//		System.out.println( startTurn);
-		int turn = 2;
+		int turn = rand.nextInt(2)+1; //1 = player1's turn, 2 = player2's turn, who go first is randomized
+		int startTurn = turn;
+		System.out.println( startTurn);
+//		int turn = 2;
 		while((result = isEnded())==0) //game loop
 		{
 			if(turn==1)
@@ -337,7 +338,7 @@ public class runTicTacToe {
 			}
 			else if(turn==2)
 			{
-				positionTicTacToe player2NextMove = ai2.myAIAlgorithm2(board,2); //2 stands for player 2
+				positionTicTacToe player2NextMove = ai2.myAIAlgorithm3(board,2); //2 stands for player 2
 				if(makeMove(player2NextMove,2,board))
 					turn = 1;
 			}
@@ -351,26 +352,27 @@ public class runTicTacToe {
 			//game is ended
 		if(result==1)
 		{
-			//game ends, player 1 wins 
+			//game ends, player 1 wins
+			winCount++;
 			System.out.println("Player1 Wins");
-			printBoardTicTacToe(board);
+//			printBoardTicTacToe(board);
 		}
 		else if(result==2)
 		{
 			//game ends, player 1 wins 
 			System.out.println("Player2 Wins");
-			printBoardTicTacToe(board);
+//			printBoardTicTacToe(board);
 		}
 		else if(result==-1)
 		{
 			//game ends, it's a draw 
-			System.out.println("This is a draw.");
-			printBoardTicTacToe(board);
+			System.out.println("This is a draw");
+//			printBoardTicTacToe(board);
 		}
 		else
 		{
 			//exception occurs, stop
-			System.out.println("Error!");
+			System.out.println("Error");
 		}
 		
 	}
@@ -383,11 +385,13 @@ public class runTicTacToe {
 
 		//run game loop
 
-		for(int i =0; i<3; i++) {
+		for(int i =0; i<100; i++) {
 			runTicTacToe rttt = new runTicTacToe();
 			rttt.run();
-
 		}
+			System.out.println("winning rate for player1 is: " + winCount/100.00);
+
+
 	}
 }
 
