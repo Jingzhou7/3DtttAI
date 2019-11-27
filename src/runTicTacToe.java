@@ -326,8 +326,8 @@ public class runTicTacToe {
 		Random rand = new Random();
 		int turn = rand.nextInt(2)+1; //1 = player1's turn, 2 = player2's turn, who go first is randomized
 		int startTurn = turn;
-		System.out.println( startTurn);
-//		int turn = 2;
+		System.out.print("Player" + startTurn + " starts and ");
+//		int turn = 1;
 		while((result = isEnded())==0) //game loop
 		{
 			if(turn==1)
@@ -338,7 +338,7 @@ public class runTicTacToe {
 			}
 			else if(turn==2)
 			{
-				positionTicTacToe player2NextMove = ai2.myAIAlgorithm3(board,2); //2 stands for player 2
+				positionTicTacToe player2NextMove = ai2.myAIAlgorithm(board,2); //2 stands for player 2
 				if(makeMove(player2NextMove,2,board))
 					turn = 1;
 			}
@@ -353,7 +353,9 @@ public class runTicTacToe {
 		if(result==1)
 		{
 			//game ends, player 1 wins
-			winCount++;
+
+				winCount++;
+
 			System.out.println("Player1 Wins");
 //			printBoardTicTacToe(board);
 		}
@@ -387,9 +389,10 @@ public class runTicTacToe {
 
 		for(int i =0; i<100; i++) {
 			runTicTacToe rttt = new runTicTacToe();
+			System.out.print("Round " + (i+1) + " winner: ");
 			rttt.run();
 		}
-			System.out.println("winning rate for player1 is: " + winCount/100.00);
+			System.out.println("winning rate for player1 is: " + winCount + "%");
 
 
 	}
